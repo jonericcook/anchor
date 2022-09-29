@@ -22,7 +22,7 @@ config :anchor, AnchorWeb.Endpoint,
   http: [ip: {127, 0, 0, 1}, port: 4000],
   check_origin: false,
   code_reloader: true,
-  debug_errors: true,
+  debug_errors: false,
   secret_key_base: "86gvcSTdRUAVTzdAbQPuPvreRwJ4JkXqzmUgzgB0nHLWFjX56QiIUbj2RSx2QNA2",
   watchers: []
 
