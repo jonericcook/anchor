@@ -68,7 +68,9 @@ defmodule Anchor.Transactions do
           avg: avg(t.quote_currency_amount)
         }
 
-    Repo.one(query)
+    query
+    |> Repo.one()
+    |> convert_nil_to_zero()
   end
 
   def ss_quote_currency_stock_buy() do
@@ -81,7 +83,9 @@ defmodule Anchor.Transactions do
           avg: avg(t.quote_currency_amount)
         }
 
-    Repo.one(query)
+    query
+    |> Repo.one()
+    |> convert_nil_to_zero()
   end
 
   def ss_quote_currency_each_type() do
@@ -111,5 +115,30 @@ defmodule Anchor.Transactions do
         }
 
     Repo.all(query)
+  end
+
+  defp convert_nil_to_zero(content) do
+    content
+    |> Map.update(:min, 0, fn existing_value ->
+      if is_nil(existing_value) do
+        0
+      else
+        existing_value
+      end
+    end)
+    |> Map.update(:max, 0, fn existing_value ->
+      if is_nil(existing_value) do
+        0
+      else
+        existing_value
+      end
+    end)
+    |> Map.update(:avg, 0, fn existing_value ->
+      if is_nil(existing_value) do
+        0
+      else
+        existing_value
+      end
+    end)
   end
 end
