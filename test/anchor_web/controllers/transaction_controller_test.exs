@@ -12,7 +12,13 @@ defmodule AnchorWeb.TransactionControllerTest do
   @invalid_attrs %{quote_currency: nil, quote_currency_amount: nil, status: nil, type: nil}
 
   setup %{conn: conn} do
-    {:ok, conn: put_req_header(conn, "accept", "application/json")}
+    Anchor.Accounts.create_user(%{username: "hello", password: "there"})
+    token = AnchorWeb.Token.generate_and_sign!(%{"username" => "hello", "password" => "there"})
+    conn = conn
+    |> put_req_header("accept", "application/json")
+    |> put_req_header("authorization", "Bearer #{token}")
+
+    {:ok, conn: conn}
   end
 
   describe "create transaction" do

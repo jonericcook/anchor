@@ -29,19 +29,20 @@ defmodule AnchorWeb.TransactionController do
     end
   end
 
-  def ss_quote_currency_amount(%Plug.Conn{query_params: %{"entire_dataset" => _}} = conn, _params) do
+  def ss_quote_currency_amount_entire_dataset(conn, _params) do
     json(conn, Transactions.ss_quote_currency_entire_dataset())
   end
 
-  def ss_quote_currency_amount(%Plug.Conn{query_params: %{"stock_buy" => _}} = conn, _params) do
+  def ss_quote_currency_amount_stock_buy( conn, _params) do
     json(conn, Transactions.ss_quote_currency_stock_buy())
   end
 
-  def ss_quote_currency_amount(%Plug.Conn{query_params: %{"each_type" => _}} = conn, _params) do
+  def ss_quote_currency_amount_each_type( conn, _params) do
     json(conn, Transactions.ss_quote_currency_each_type())
   end
 
-  def ss_quote_currency_amount(%Plug.Conn{query_params: %{"each_type_quote_currency_combo" => _}} = conn, _params) do
+  def ss_quote_currency_amount_each_type_quote_currency_combo(conn, _params) do
     json(conn, Transactions.ss_quote_currency_each_type_quote_currency_combo())
   end
+
 end

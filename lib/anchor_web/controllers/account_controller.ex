@@ -5,7 +5,13 @@ defmodule AnchorWeb.AccountController do
 
   def auth(conn, _opts) do
     user = Map.get(conn.assigns, :current_user)
-    token = AnchorWeb.Token.generate_and_sign!(%{"username" => user.username, "password" => user.password})
+
+    token =
+      AnchorWeb.Token.generate_and_sign!(%{
+        "username" => user.username,
+        "password" => user.password
+      })
+
     json(conn, %{token: token})
   end
 end
