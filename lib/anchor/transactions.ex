@@ -4,6 +4,7 @@ defmodule Anchor.Transactions do
   """
 
   import Ecto.Query, warn: false
+  import Ecto.OLAP.GroupingSets
   alias Anchor.Repo
 
   alias Anchor.Transactions.Transaction
@@ -15,11 +16,11 @@ defmodule Anchor.Transactions do
 
   ## Examples
 
-      iex> get_transaction!(123)
+      iex> get_transaction(123)
       %Transaction{}
 
-      iex> get_transaction!(456)
-      ** (Ecto.NoResultsError)
+      iex> get_transaction(456)
+      ** nil
 
   """
   def get_transaction(id), do: Repo.get(Transaction, id)
@@ -56,5 +57,59 @@ defmodule Anchor.Transactions do
   """
   def delete_transaction(%Transaction{} = transaction) do
     Repo.delete(transaction)
+  end
+
+  def ss_quote_currency_entire_dataset() do
+    query =
+      from t in Transaction,
+        select: %{
+          min: min(t.quote_currency_amount),
+          max: max(t.quote_currency_amount),
+          avg: avg(t.quote_currency_amount)
+        }
+
+    Repo.one(query)
+  end
+
+  def ss_quote_currency_stock_buy() do
+    query =
+      from t in Transaction,
+        where: t.type == "stock_buy",
+        select: %{
+          min: min(t.quote_currency_amount),
+          max: max(t.quote_currency_amount),
+          avg: avg(t.quote_currency_amount)
+        }
+
+    Repo.one(query)
+  end
+
+  def ss_quote_currency_each_type() do
+    query =
+      from t in Transaction,
+        group_by: t.type,
+        select: %{
+          type: t.type,
+          min: min(t.quote_currency_amount),
+          max: max(t.quote_currency_amount),
+          avg: avg(t.quote_currency_amount)
+        }
+
+    Repo.all(query)
+  end
+
+  def ss_quote_currency_each_type_quote_currency_combo() do
+    query =
+      from t in Transaction,
+        group_by: grouping_sets([{t.type, t.quote_currency}]),
+        select: %{
+          type: t.type,
+          quote_currency: t.quote_currency,
+          min: min(t.quote_currency_amount),
+          max: max(t.quote_currency_amount),
+          avg: avg(t.quote_currency_amount)
+        }
+
+    Repo.all(query)
   end
 end

@@ -11,10 +11,10 @@ defmodule Anchor.TransactionsFixtures do
     {:ok, transaction} =
       attrs
       |> Enum.into(%{
-        quote_currency: "some quote_currency",
+        quote_currency: "EOS",
         quote_currency_amount: 120.5,
-        status: "some status",
-        type: "some type"
+        status: "executed",
+        type: "adjustment"
       })
       |> Anchor.Transactions.create_transaction()
 
