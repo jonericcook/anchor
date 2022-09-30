@@ -19,11 +19,12 @@ response:
 }
 ```
 
-``GET`` `http://localhost:4000/auth`
-Basic Auth Authorization header
-Username hello
-Password there
+`GET` `http://localhost:4000/auth`
+For Authorizationi use Basic Auth header
 
+Set Username to `hello` and Password to `there`
+
+Example in Postman below
 [![Postman](postman.png)]
 
 response:
