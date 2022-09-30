@@ -14,9 +14,11 @@ defmodule AnchorWeb.TransactionControllerTest do
   setup %{conn: conn} do
     Anchor.Accounts.create_user(%{username: "hello", password: "there"})
     token = AnchorWeb.Token.generate_and_sign!(%{"username" => "hello", "password" => "there"})
-    conn = conn
-    |> put_req_header("accept", "application/json")
-    |> put_req_header("authorization", "Bearer #{token}")
+
+    conn =
+      conn
+      |> put_req_header("accept", "application/json")
+      |> put_req_header("authorization", "Bearer #{token}")
 
     {:ok, conn: conn}
   end
@@ -50,7 +52,7 @@ defmodule AnchorWeb.TransactionControllerTest do
     end
   end
 
-  describe "ss_quote_currency_amount" do
+  describe "ss_quote_currency_amount/*" do
     test "gets min, max and avg of quote_currency_amount over entire dataset", %{conn: conn} do
       conn =
         post(conn, Routes.transaction_path(conn, :create), %{
@@ -68,8 +70,7 @@ defmodule AnchorWeb.TransactionControllerTest do
           type: "stock_buy"
         })
 
-      conn =
-        get(conn, Routes.transaction_path(conn, :ss_quote_currency_amount) <> "?entire_dataset")
+      conn = get(conn, Routes.transaction_path(conn, :ss_quote_currency_amount_entire_dataset))
 
       assert %{"min" => 10.5, "max" => 100.7, "avg" => 55.6} = json_response(conn, 200)
     end
@@ -99,7 +100,7 @@ defmodule AnchorWeb.TransactionControllerTest do
           type: "adjustment"
         })
 
-      conn = get(conn, Routes.transaction_path(conn, :ss_quote_currency_amount) <> "?stock_buy")
+      conn = get(conn, Routes.transaction_path(conn, :ss_quote_currency_amount_stock_buy))
 
       assert %{"min" => 10.5, "max" => 100.7, "avg" => 55.6} = json_response(conn, 200)
     end
@@ -137,7 +138,7 @@ defmodule AnchorWeb.TransactionControllerTest do
           type: "adjustment"
         })
 
-      conn = get(conn, Routes.transaction_path(conn, :ss_quote_currency_amount) <> "?each_type")
+      conn = get(conn, Routes.transaction_path(conn, :ss_quote_currency_amount_each_type))
 
       assert [
                %{"type" => "stock_buy", "min" => 10.5, "max" => 100.7, "avg" => 55.6},
@@ -190,8 +191,7 @@ defmodule AnchorWeb.TransactionControllerTest do
       conn =
         get(
           conn,
-          Routes.transaction_path(conn, :ss_quote_currency_amount) <>
-            "?each_type_quote_currency_combo"
+          Routes.transaction_path(conn, :ss_quote_currency_amount_each_type_quote_currency_combo)
         )
 
       assert [
