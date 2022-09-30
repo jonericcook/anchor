@@ -67,6 +67,9 @@ response
 `DELETE` `http://localhost:4000/transactions/1`
 
 `GET` `http://localhost:4000/transactions/ss/quote_currency_amount/entire_dataset`
+
 `GET` `http://localhost:4000/transactions/ss/quote_currency_amount/stock_buy`
+
 `GET` `http://localhost:4000/transactions/ss/quote_currency_amount/each_type`
+
 `GET` `http://localhost:4000/transactions/ss/quote_currency_amount/each_type_quote_currency_combo`
