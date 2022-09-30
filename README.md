@@ -1,4 +1,4 @@
-# Anchor
+# Anchor Take Home Coding Challenge
 
 ## Start the app
 
@@ -9,6 +9,7 @@
 `POST` `http://localhost:4000/signup`
 
 request body
+
 `{ "username": "hello", "password": "there" }`
 
 response
@@ -24,7 +25,7 @@ response
 
 `GET` `http://localhost:4000/auth`
 
-For Authorizationi use Basic Auth header
+For Authorization use Basic Auth header
 
 Set Username to `hello` and Password to `there`
 
@@ -38,7 +39,8 @@ response
 }
 ```
 
-The token received from the /auth endpoint must be placed as the Bearer Token for all the endpoints below.
+**Note:** The token received from `/auth` must be placed as the Bearer Token for all the endpoints below.
+
 
 `POST` `http://localhost:4000/transactions`
 
