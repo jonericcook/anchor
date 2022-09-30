@@ -12,7 +12,7 @@ config :anchor,
 
 # Configures the endpoint
 config :anchor, AnchorWeb.Endpoint,
-  url: [host: "localhost"],
+  url: [host: "localhost", port: 4000],
   render_errors: [view: AnchorWeb.ErrorView, accepts: ~w(json), layout: false],
   pubsub_server: Anchor.PubSub,
   live_view: [signing_salt: "lsDsDULD"]
@@ -24,6 +24,16 @@ config :logger, :console,
 
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
+
+config :joken, default_signer: "secret"
+
+config :anchor, Anchor.Repo,
+  database: "anchor_repo",
+  username: "postgres",
+  password: "postgres",
+  hostname: "db",
+  port: 5432
+
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
