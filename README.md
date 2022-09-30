@@ -44,7 +44,7 @@ response
 
 ***
 
-**Note:** The token received from `/auth` must be placed as the Bearer Token for all the endpoints below.
+The token received from `/auth` must be placed as the Bearer Token for all the endpoints below.
 
 **Postman Bearer Token Example**
 
@@ -76,7 +76,7 @@ response
 
 ***
 
-`DELETE` `http://localhost:4000/transactions/1`
+`DELETE` `http://localhost:4000/transactions/:id`
 
 ***
 
