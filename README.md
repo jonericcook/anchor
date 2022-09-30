@@ -7,8 +7,11 @@
 ## Endpoints
 
 `POST` `http://localhost:4000/signup`
-request body:  `{ "username": "hello", "password": "there" }`
-response:
+
+request body
+`{ "username": "hello", "password": "there" }`
+
+response
 ```
 {
     "user": {
@@ -20,14 +23,15 @@ response:
 ```
 
 `GET` `http://localhost:4000/auth`
+
 For Authorizationi use Basic Auth header
 
 Set Username to `hello` and Password to `there`
 
 Example in Postman below
-[![Postman](postman.png)]
+[![Postman](postman.png)
 
-response:
+response
 ```
 {
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJKb2tlbiIsImV4cCI6MTY2NDUyNjIwOSwiaWF0IjoxNjY0NTE5MDA5LCJpc3MiOiJKb2tlbiIsImp0aSI6IjJzY291ZTI1ZDVyNnFtaHVrazAwMDBkMSIsIm5iZiI6MTY2NDUxOTAwOSwicGFzc3dvcmQiOiJ0aGVyZSIsInVzZXJuYW1lIjoiaGVsbG8ifQ.5jsmFb-KWxJh4nNH9tqInEEB83S_J2f4C7lIBCA0mq4"
@@ -37,13 +41,15 @@ response:
 The token received from the /auth endpoint must be placed as the Bearer Token for all the endpoints below.
 
 `POST` `http://localhost:4000/transactions`
-request body:
+
+request body
 ```
 {
     "type": "adjustment", "status": "executed", "quote_currency": "EOS", "quote_currency_amount": "3.0"
 }
 ```
-response:
+
+response
 ```
 {
     "data": {
