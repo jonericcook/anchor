@@ -23,15 +23,17 @@ response
 }
 ```
 
+***
+
 `GET` `http://localhost:4000/auth`
 
 For Authorization use Basic Auth header
 
 Set Username to `hello` and Password to `there`
 
-**Postman Example**
+**Postman Basic Auth Example**
 
-![Postman](postman.png)
+![Postman](postman_basic_auth.png)
 
 response
 ```
@@ -40,8 +42,15 @@ response
 }
 ```
 
+***
+
 **Note:** The token received from `/auth` must be placed as the Bearer Token for all the endpoints below.
 
+**Postman Bearer Token Example**
+
+![Postman](postman_bearer_token.png)
+
+***
 
 `POST` `http://localhost:4000/transactions`
 
@@ -65,12 +74,22 @@ response
 }
 ```
 
+***
+
 `DELETE` `http://localhost:4000/transactions/1`
+
+***
 
 `GET` `http://localhost:4000/transactions/ss/quote_currency_amount/entire_dataset`
 
+***
+
 `GET` `http://localhost:4000/transactions/ss/quote_currency_amount/stock_buy`
 
+***
+
 `GET` `http://localhost:4000/transactions/ss/quote_currency_amount/each_type`
+
+***
 
 `GET` `http://localhost:4000/transactions/ss/quote_currency_amount/each_type_quote_currency_combo`
