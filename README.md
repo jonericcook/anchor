@@ -29,8 +29,9 @@ For Authorization use Basic Auth header
 
 Set Username to `hello` and Password to `there`
 
-Example in Postman below
-[![Postman](postman.png)
+**Postman Example**
+
+![Postman](postman.png)
 
 response
 ```
